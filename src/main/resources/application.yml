@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:hsqldb:mem:usersApplications
+    driver-class-name: org.hsqldb.jdbcDriver
+    username: SA
+    password: SA
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+
