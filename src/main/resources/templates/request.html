@@ -1,49 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="ISO-8859-1">
-<title>User Registration</title>
-<style type="text/css">
-	label {
-		display: inline-block;
-		width: 200px;
-		margin: 5px;
-		text-align: left;
-	}
-	input[type=text], select {
-		display: inline-block;
-		width: 200px;
-	}
-	button {
-		padding: 5px;
-		margin: 10px;
-	}
-</style>
-</head>
 <body>
-	<div align="center">
-		<h1>Contact us</h1>
-		<form action="#" th:action="@{/}" method="post" th:object="${user}">
-			<label>Kind of Request</label></br>
+<style>
+    p.error {
+        color: red;
+    }
+</style>
+    <div align="center">
+        <h1>Contact us</h1>
 
-			<select th:field="*{requestType}">
-				<option th:each="request : ${requests}" th:value="${request}" th:text="${request}" />
-			</select><br/><br/>
+        <form action="#" th:action="@{/}" th:object="${request}" method="post">
+            <label>Kind of Request</label></br>
 
-			<label>Policy Number</label><br/>
-			<input type="text" th:field="*{policyNumber}" pattern="[A-Za-z0-9]+" oninvalid="setCustomValidity('Please enter only alphanumeric codes')" oninput="setCustomValidity('')" required/><br/><br/>
-			
-			<label>Name</label><br/>
-			<input type="text" th:field="*{name}" pattern="[A-Za-z]+" oninvalid="setCustomValidity('Please enter on alphabets only')" oninput="setCustomValidity('')" required/><br/><br/>
-					
-			<label>Surname</label><br/>
-			<input type="text" th:field="*{surname}" pattern="[A-Za-z]+" oninvalid="setCustomValidity('Please enter on alphabets only')" oninput="setCustomValidity('')" required/><br/><br/>
+            <select th:field="*{requestType}">
+                <option th:each="request : ${requests}" th:value="${request}" th:text="${request}"/>
+            </select><br/><br/>
 
-			<label>Your request</label><br/>
-			<textarea th:field="*{note}" maxlength="5000" required></textarea><br/>
+            <label>Policy Number</label><br/>
+            <input type="text" th:field="*{policyNumber}">
+            <p class="error" th:if="${#fields.hasErrors('policyNumber')}" th:errors="*{policyNumber}">Policy Number Error</p><br/><br/>
 
-			<button type="submit">SEND REQUEST</button>
-		</form>
-	</div>
+            <label>Name</label><br/>
+            <input type="text" th:field="*{name}">
+            <p class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</p><br/><br/>
+
+            <label>Surname</label><br/>
+            <input type="text" th:field="*{surname}">
+            <p class="error" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Surname Error</p><br/><br/>
+
+            <label>Your request</label><br/>
+            <textarea th:field="*{note}"></textarea>
+            <p class="error" th:if="${#fields.hasErrors('note')}" th:errors="*{note}">Note Number Error</p><br/>
+
+            <button type="submit">SEND REQUEST</button>
+        </form>
+    </div>
 </body>
 </html>
